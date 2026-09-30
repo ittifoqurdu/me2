@@ -117,4 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(ripple);
     setTimeout(() => ripple.remove(), 700);
   });
+
+  // ── Netlify Injected Elements & Drawer Auto-Purge ──
+  const purgeNetlifyInjections = () => {
+    document.querySelectorAll('netlify-drawer, #netlify-feedback, [data-netlify-deploy-id], iframe[src*="netlify"], div[class*="netlify-drawer"], .netlify-badge, #netlify-identity-widget').forEach(el => {
+      try { el.remove(); } catch (_) {}
+    });
+  };
+  purgeNetlifyInjections();
+  const netlifyObserver = new MutationObserver(purgeNetlifyInjections);
+  netlifyObserver.observe(document.documentElement, { childList: true, subtree: true });
 });
+

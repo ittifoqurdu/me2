@@ -674,3 +674,28 @@ html, body {
     font-size: clamp(1.9rem, 6.8vw, 2.5rem);
   }
 }
+
+/* ==========================================================================
+   Netlify Injected Elements, Badges & Drawer Suppression
+   ========================================================================== */
+[data-netlify-deploy-id],
+netlify-drawer,
+#netlify-feedback,
+#netlify-identity-widget,
+.netlify-badge,
+div[class*="netlify-drawer"],
+div[id*="netlify"],
+iframe[src*="netlify.app"],
+iframe[id*="netlify"],
+[data-netlify-drawer] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -99999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  z-index: -9999 !important;
+}
+
