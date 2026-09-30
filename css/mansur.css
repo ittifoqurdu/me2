@@ -4,7 +4,7 @@
    "20 yillik bekorchi !" (pastida)
    "whats up bro !" (chapda)
    "Qandaysiz bratim !" (o'ngda)
-   Barchasida bir xil kattalik, animatsiya va hover ranglari
+   Burchaklarda: GitHub, Instagram, Telegram
    ========================================================================== */
 
 :root {
@@ -12,8 +12,11 @@
   --text-dark: #1E1E1E;
   --bubble-bg: #FFFFFF;
   --border-thick: 3.5px solid var(--text-dark);
+  --border-corner: 2.5px solid var(--text-dark);
   --shadow-neo: 6px 6px 0px var(--text-dark);
   --shadow-hover: 10px 10px 0px var(--text-dark);
+  --shadow-corner: 4px 4px 0px var(--text-dark);
+  --shadow-corner-hover: 6px 6px 0px var(--text-dark);
   --font-handwriting: 'Caveat', cursive, sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
 
@@ -22,6 +25,7 @@
   --color-pink: #FF8AE2;
   --color-yellow: #FFE566;
   --color-green: #41FF67;
+  --color-telegram: #2AABEE;
 }
 
 *, *::before, *::after {
@@ -48,18 +52,222 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Ambient Dot Grid Background ── */
+/* ── Ambient Drifting Dot Grid ── */
 .ambient-grid {
+  position: fixed;
+  top: -60px;
+  left: -60px;
+  width: calc(100vw + 120px);
+  height: calc(100vh + 120px);
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(circle, rgba(30, 30, 30, 0.08) 1.3px, transparent 1.3px);
+  background-size: 28px 28px;
+  animation: gridDrift 35s linear infinite;
+  will-change: transform;
+}
+
+@keyframes gridDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(28px, 28px);
+  }
+}
+
+/* ── Interactive Cursor Ambient Spotlight Glow ── */
+.cursor-glow {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(30, 30, 30, 0.08) 1.2px, transparent 1.2px);
-  background-size: 28px 28px;
-  opacity: 0.85;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.65) 0%, rgba(239, 239, 235, 0) 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: soft-light;
+}
+
+/* ── Floating Ambient Doodles ── */
+.ambient-doodles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.doodle {
+  position: absolute;
+  font-family: var(--font-handwriting);
+  color: rgba(30, 30, 30, 0.14);
+  font-weight: 700;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.25s ease-out;
+}
+
+.doodle-1 { top: 12%; left: 16%; font-size: 2.2rem; animation: floatDoodle 7s ease-in-out infinite; }
+.doodle-2 { top: 78%; left: 14%; font-size: 2.8rem; animation: floatDoodle 9s ease-in-out infinite 1s; }
+.doodle-3 { top: 18%; right: 18%; font-size: 1.8rem; font-family: var(--font-sans); animation: floatDoodle 8s ease-in-out infinite 2s; }
+.doodle-4 { top: 76%; right: 16%; font-size: 2.4rem; animation: floatDoodle 6.5s ease-in-out infinite 0.5s; }
+.doodle-5 { top: 48%; left: 8%; font-size: 2rem; animation: floatDoodle 8.5s ease-in-out infinite 1.5s; }
+.doodle-6 { top: 52%; right: 10%; font-size: 1.8rem; font-family: var(--font-sans); animation: floatDoodle 7.5s ease-in-out infinite 3s; }
+.doodle-7 { top: 88%; left: 45%; font-size: 2.4rem; animation: floatDoodle 9s ease-in-out infinite 2s; }
+.doodle-8 { top: 8%; left: 52%; font-size: 1.6rem; font-family: var(--font-sans); animation: floatDoodle 7s ease-in-out infinite 1s; }
+
+@keyframes floatDoodle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(8deg);
+  }
+}
+
+/* ── Click Ripple Ring ── */
+.click-ripple {
+  position: fixed;
+  border: 2px solid rgba(30, 30, 30, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleSpread 0.65s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes rippleSpread {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.7;
+    width: 0;
+    height: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* ==========================================================================
+   Corner Social Navigation (GitHub, Instagram, Telegram)
+   ========================================================================== */
+.corner-nav {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.corner-btn {
+  position: absolute;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 10px 18px;
+  border: var(--border-corner);
+  border-radius: 14px;
+  box-shadow: var(--shadow-corner);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease,
+              background-color 0.2s ease,
+              color 0.2s ease;
+  user-select: none;
+  outline: none;
+}
+
+/* Top-Left: GitHub */
+.corner-top-left {
+  top: 28px;
+  left: 32px;
+}
+
+/* Top-Right: Instagram */
+.corner-top-right {
+  top: 28px;
+  right: 32px;
+}
+
+/* Bottom-Left: Call */
+.corner-bottom-left {
+  bottom: 28px;
+  left: 32px;
+}
+
+/* Bottom-Right: Telegram */
+.corner-bottom-right {
+  bottom: 28px;
+  right: 32px;
+}
+
+.corner-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.stroke-icon {
+  stroke: currentColor;
+}
+
+.corner-arrow {
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+/* Corner Hover Effects */
+.corner-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: var(--shadow-corner-hover);
+}
+
+.corner-btn:hover .corner-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* 1. GitHub: Dark Neo */
+.corner-top-left:hover {
+  background-color: #1E1E1E;
+  color: #FFFFFF;
+}
+
+/* 2. Instagram: Neon Pink */
+.corner-top-right:hover {
+  background-color: var(--color-pink);
+  color: #1E1E1E;
+}
+
+/* 3. Call: Lime Green */
+.corner-bottom-left:hover {
+  background-color: var(--color-green);
+  color: #1E1E1E;
+}
+
+/* 4. Telegram: Sky Blue */
+.corner-bottom-right:hover {
+  background-color: var(--color-cyan);
+  color: #1E1E1E;
+}
+
+.corner-btn:active {
+  transform: scale(0.96) translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--text-dark);
 }
 
 /* ── Fullscreen Center Container ── */
@@ -374,38 +582,72 @@ html, body {
    Mobile Responsive (Max Width: 860px)
    ========================================================================== */
 @media (max-width: 860px) {
+  /* Corner buttons on mobile */
+  .corner-top-left {
+    top: 14px;
+    left: 14px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+  .corner-top-right {
+    top: 14px;
+    right: 14px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+  .corner-bottom-left {
+    bottom: 14px;
+    left: 14px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+  .corner-bottom-right {
+    bottom: 14px;
+    right: 14px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+  .corner-icon {
+    width: 16px;
+    height: 16px;
+  }
+
   .stage-wrapper {
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     text-align: center;
   }
 
   .center-column {
     order: 2;
-    gap: 14px;
+    gap: 12px;
   }
 
   .bubble-top {
     border-radius: 24px;
-    padding: 10px 24px;
+    padding: 10px 22px;
   }
   .bubble-top::before, .bubble-top::after { display: none; }
   .bubble-top .speech-text {
-    font-size: clamp(2rem, 7vw, 2.7rem);
+    font-size: clamp(1.9rem, 6.8vw, 2.5rem);
   }
 
   .mansur-head-standalone {
-    width: clamp(180px, 48vw, 240px);
-    height: clamp(180px, 48vw, 240px);
+    width: clamp(170px, 45vw, 220px);
+    height: clamp(170px, 45vw, 220px);
   }
 
   .bubble-bottom {
     border-radius: 24px;
-    padding: 10px 24px;
+    padding: 10px 22px;
   }
   .bubble-bottom::before, .bubble-bottom::after { display: none; }
   .bubble-bottom .speech-text {
-    font-size: clamp(2rem, 7vw, 2.7rem);
+    font-size: clamp(1.9rem, 6.8vw, 2.5rem);
   }
 
   /* Left bubble placed at the bottom on mobile */
@@ -413,11 +655,11 @@ html, body {
     order: 3;
     transform: rotate(-2deg);
     border-radius: 24px;
-    padding: 10px 24px;
+    padding: 10px 22px;
   }
   .bubble-left::before, .bubble-left::after { display: none; }
   .bubble-left .speech-text {
-    font-size: clamp(2rem, 7vw, 2.7rem);
+    font-size: clamp(1.9rem, 6.8vw, 2.5rem);
   }
 
   /* Right bubble placed at the top on mobile */
@@ -425,10 +667,10 @@ html, body {
     order: 1;
     transform: rotate(2deg);
     border-radius: 24px;
-    padding: 10px 24px;
+    padding: 10px 22px;
   }
   .bubble-right::before, .bubble-right::after { display: none; }
   .bubble-right .speech-text {
-    font-size: clamp(2rem, 7vw, 2.7rem);
+    font-size: clamp(1.9rem, 6.8vw, 2.5rem);
   }
 }

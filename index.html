@@ -10,15 +10,67 @@
   <!-- Fonts: Caveat (authentic cursive/handwriting) & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   
   <!-- CSS -->
-  <link rel="stylesheet" href="css/mansur.css?v=6">
+  <link rel="stylesheet" href="css/mansur.css?v=7">
 </head>
 <body>
 
-  <!-- Ambient Dot Grid Background -->
-  <div class="ambient-grid" aria-hidden="true"></div>
+  <!-- Ambient Animated Background Elements -->
+  <div class="ambient-grid" id="ambientGrid" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="ambient-doodles" id="ambientDoodles" aria-hidden="true">
+    <span class="doodle doodle-1">✦</span>
+    <span class="doodle doodle-2">✱</span>
+    <span class="doodle doodle-3">{ }</span>
+    <span class="doodle doodle-4">✦</span>
+    <span class="doodle doodle-5">⚡</span>
+    <span class="doodle doodle-6">//</span>
+    <span class="doodle doodle-7">✶</span>
+    <span class="doodle doodle-8">&lt;/&gt;</span>
+  </div>
+
+  <!-- Corner Social Navigation (Burchaklardagi havolalar) -->
+  <nav class="corner-nav" aria-label="Ijtimoiy tarmoqlar">
+    <!-- Top-Left: GitHub -->
+    <a href="https://github.com/durd1ma7ov06" target="_blank" rel="noopener noreferrer" class="corner-btn corner-top-left" id="btnGithub" title="GitHub: @durd1ma7ov06">
+      <svg class="corner-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+      <span class="corner-label">GitHub</span>
+      <span class="corner-arrow">↗</span>
+    </a>
+
+    <!-- Top-Right: Instagram -->
+    <a href="https://instagram.com/mansurdurdimatov" target="_blank" rel="noopener noreferrer" class="corner-btn corner-top-right" id="btnInstagram" title="Instagram: @mansurdurdimatov">
+      <svg class="corner-icon stroke-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+      <span class="corner-label">Instagram</span>
+      <span class="corner-arrow">↗</span>
+    </a>
+
+    <!-- Bottom-Left: Call (4-chi burchak) -->
+    <a href="tel:+998951053909" class="corner-btn corner-bottom-left" id="btnCall" title="+998 95 105 39 09">
+      <svg class="corner-icon stroke-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="corner-label">Call</span>
+      <span class="corner-arrow">↗</span>
+    </a>
+
+    <!-- Bottom-Right: Telegram -->
+    <a href="https://t.me/durdimatov_mansur" target="_blank" rel="noopener noreferrer" class="corner-btn corner-bottom-right" id="btnTelegram" title="Telegram: @durdimatov_mansur">
+      <svg class="corner-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/>
+      </svg>
+      <span class="corner-label">Telegram</span>
+      <span class="corner-arrow">↗</span>
+    </a>
+  </nav>
 
   <!-- Single Centered Showcase -->
   <main class="page-container">
@@ -57,6 +109,6 @@
     </div>
   </main>
 
-  <script src="js/mansur.js?v=6"></script>
+  <script src="js/mansur.js?v=7"></script>
 </body>
 </html>

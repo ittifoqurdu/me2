@@ -63,24 +63,58 @@ document.addEventListener('DOMContentLoaded', () => {
   bubbleWhatsUp?.addEventListener('click', () => triggerBubble(bubbleWhatsUp, 520, 920));
   bubbleBratim?.addEventListener('click', () => triggerBubble(bubbleBratim, 400, 780));
 
-  // ── Parallax Smooth Follow on Mouse Move (Crisp 2D, No Blur) ──
+  // ── Corner Button Click Sounds ──
+  document.querySelectorAll('.corner-btn').forEach(btn => {
+    btn.addEventListener('click', () => playPopSound(480, 880));
+  });
+
+  // ── Cursor Glow & Ambient Parallax & Head Follow ──
+  const cursorGlow = document.getElementById('cursorGlow');
+  const doodles = document.querySelectorAll('.doodle');
+
   window.addEventListener('mousemove', (e) => {
-    if (!mansurImg || window.innerWidth <= 860) return;
+    // 1. Move Cursor Glow
+    if (cursorGlow) {
+      cursorGlow.style.opacity = '1';
+      cursorGlow.style.left = `${e.clientX}px`;
+      cursorGlow.style.top = `${e.clientY}px`;
+    }
+
+    if (window.innerWidth <= 860) return;
+
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     const deltaX = (e.clientX - centerX) / centerX;
     const deltaY = (e.clientY - centerY) / centerY;
 
-    const moveX = deltaX * 10;
-    const moveY = deltaY * 8;
-    const rot = deltaX * 2.5;
+    // 2. Mansur Head 2D Crisp Parallax
+    if (mansurImg) {
+      const moveX = deltaX * 10;
+      const moveY = deltaY * 8;
+      const rot = deltaX * 2.5;
+      mansurImg.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rot}deg)`;
+    }
 
-    mansurImg.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rot}deg)`;
+    // 3. Subtle Ambient Doodle Parallax
+    doodles.forEach((doodle, i) => {
+      const speed = (i % 3 + 1) * 6;
+      doodle.style.transform = `translate(${deltaX * -speed}px, ${deltaY * -speed}px)`;
+    });
   });
 
   window.addEventListener('mouseleave', () => {
-    if (mansurImg) {
-      mansurImg.style.transform = 'translate(0px, 0px) rotate(0deg)';
-    }
+    if (cursorGlow) cursorGlow.style.opacity = '0';
+    if (mansurImg) mansurImg.style.transform = 'translate(0px, 0px) rotate(0deg)';
+    doodles.forEach(doodle => doodle.style.transform = 'translate(0px, 0px)');
+  });
+
+  // ── Background Click Ripple Effect ──
+  window.addEventListener('click', (e) => {
+    const ripple = document.createElement('div');
+    ripple.className = 'click-ripple';
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
   });
 });
